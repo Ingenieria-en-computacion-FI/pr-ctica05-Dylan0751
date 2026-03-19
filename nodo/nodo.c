@@ -5,8 +5,8 @@ Nodo* nodo_crear(int dato){
     Nodo *nodo;
     nodo = (Nodo *)malloc(sizeof(Nodo));
     if(nodo != NULL){
-    nodo->dato = dato;
-    nodo->siguiente = NULL;
+        nodo->dato = dato;
+        nodo->siguiente = NULL;
     }
     return nodo;
  }
