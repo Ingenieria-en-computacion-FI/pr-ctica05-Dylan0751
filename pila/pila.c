@@ -6,7 +6,7 @@ Pila* pila_crear(){
    
 }
 
-int pila_vacia(Pila* pila){
+bool pila_vacia(Pila* pila){
     
     return lista_vacia(pila);
    

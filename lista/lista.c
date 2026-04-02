@@ -9,8 +9,8 @@ Lista* lista_crear(){
     lista = (Lista *)malloc(sizeof(Lista));
     lista-> head = NULL;
     lista-> tail = NULL;
-    
-    return lista;
+                        
+     return lista;
 }
 
 bool lista_vacia(Lista* lista){
@@ -30,7 +30,7 @@ void lista_insertar_head(Lista* lista, int dato){
 }
 
 void lista_insertar_tail(Lista* lista, int dato){
-    
+                                                                            
     Nodo* newNodo = nodo_crear(dato);
     if(lista_vacia(lista)){
         lista->head = lista->tail = newNodo;
@@ -52,7 +52,7 @@ int lista_eliminar_head(Lista* lista){
     lista->head = temp->siguiente;
 
     if (lista->head == NULL){
-        lista->tail == NULL;
+        lista->tail = NULL;
     }
 
     nodo_destruir(temp);
@@ -87,15 +87,14 @@ int lista_eliminar_tail(Lista* lista){
     nodo_destruir(temp);
 
     return dato;
-   
+                                                                                                                                                                                                                                                                                       
 }
 
-void lista_imprimir(Lista* lista)
-{
+void lista_imprimir(Lista* lista){
+   
     Nodo* actual = lista->head;
 
-    while(actual != NULL)
-    {
+    while(actual != NULL){
         printf("%d -> ", actual->dato);
         actual = actual->siguiente;
     }
@@ -109,5 +108,105 @@ void lista_destruir(Lista* lista){
         lista_eliminar_head(lista);
     }
     free(lista);
-    
+}    
+//Funciones para implementar Cola Circular
+
+void lista_insertar_head_CC(Lista* lista, int dato){
+   
+    Nodo* newNodo = nodo_crear(dato);
+    if(lista_vacia(lista)){
+        lista->head = lista->tail = newNodo;
+        newNodo->siguiente = newNodo;
+    }else{
+        newNodo->siguiente = lista->head;
+        lista->head = newNodo;
+        lista->tail->siguiente = lista->head;
+    }
 }
+
+void lista_insertar_tail_CC(Lista* lista, int dato){
+     
+    Nodo* newNodo = nodo_crear(dato);
+    if(lista_vacia(lista)){
+        lista->head = lista->tail = newNodo;
+        newNodo->siguiente = newNodo;
+    }else{
+        newNodo->siguiente = lista->head;
+        lista->tail->siguiente = newNodo;
+        lista->tail = newNodo;
+    }
+}
+
+int lista_eliminar_head_CC(Lista* lista){
+
+     if(lista_vacia(lista)){
+        return -1;
+    }
+    Nodo* temp = lista->head;
+    int dato = temp->dato;
+
+    if (lista->head == lista->tail){
+        lista->head = lista->tail = NULL;
+    }else{
+        lista->head = temp->siguiente;
+        lista->tail->siguiente = lista->head;
+    }
+
+    nodo_destruir(temp);
+    return dato;
+
+}
+
+int lista_eliminar_tail_CC(Lista* lista){
+
+     if(lista_vacia(lista)){
+        return -1;
+    }
+    Nodo* actual = lista->head;
+
+    if(lista->head == lista->tail){
+        int dato = actual->dato;
+        nodo_destruir(actual);
+        lista->head = NULL;
+        lista->tail = NULL;
+
+        return dato;
+    }
+
+    while(actual->siguiente != lista->tail){
+        actual = actual->siguiente;
+    }
+    Nodo* temp = lista->tail;
+    int dato = temp->dato;
+    actual->siguiente = lista->head;
+    lista->tail = actual;
+
+    nodo_destruir(temp);
+
+    return dato;    
+}
+
+void lista_imprimir_CC(Lista* lista){
+
+    if(lista_vacia(lista)){
+        printf("La lista esta vacia\n");
+        return;
+    }
+
+    Nodo* actual = lista->head;
+
+    do{
+        printf("%d -> ", actual->dato);
+        actual = actual->siguiente;
+    }while(actual != lista->head);
+
+    printf("Circular\n");
+}
+
+void lista_destruir_CC(Lista* lista){
+
+    while(!lista_vacia(lista)){
+        lista_eliminar_head_CC(lista);
+    }
+    free(lista);
+}    

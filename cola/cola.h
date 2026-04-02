@@ -1,5 +1,6 @@
 #ifndef COLA_H
 #define COLA_H
+#include <stdbool.h>
 
 #include "../lista/lista.h"
 
@@ -7,7 +8,7 @@ typedef Lista Cola;
 
 Cola* cola_crear();
 
-int cola_vacia(Cola* cola);
+bool cola_vacia(Cola* cola);
 
 /*
 TODO

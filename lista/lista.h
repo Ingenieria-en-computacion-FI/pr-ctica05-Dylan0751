@@ -15,26 +15,28 @@ bool lista_vacia(Lista* lista);
 
 void lista_insertar_head(Lista* lista, int dato);
 
-/*
-TODO
-Inserta al final usando tail
-*/
 void lista_insertar_tail(Lista* lista, int dato);
 
-/*
-TODO
-Eliminar del inicio
-*/
 int lista_eliminar_head(Lista* lista);
 
-/*
-TODO
-Eliminar del final
-*/
 int lista_eliminar_tail(Lista* lista);
 
 void lista_imprimir(Lista* lista);
 
 void lista_destruir(Lista* lista);
+
+//Funciiones para implementar Cola Circular 
+
+void lista_insertar_head_CC(Lista* lista, int dato);
+
+void lista_insertar_tail_CC(Lista* lista, int dato);
+
+int lista_eliminar_head_CC(Lista* lista);
+
+int lista_eliminar_tail_CC(Lista* lista);
+
+void lista_imprimir_CC(Lista* lista);
+
+void lista_destruir_CC(Lista* lista);
 
 #endif
